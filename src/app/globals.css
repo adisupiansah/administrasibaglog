@@ -2,20 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
+/* fonts roboto google */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #181818;
+  --blue-color: #2666CF;
+  --red-color: #C62E2E;
+  --green-color: #72BF78;
+  --yellow-color: #FABC3F;
+  --white-color: #FFFFFF;
+  --black-color: #1E1E1E;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  color: var(--foreground);
+  color: var(--white-color);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* navbar */
+.navbar{
+  background-color: var(--black-color);
+  padding: 1rem;
+  border-bottom: 1px solid var(--white-color);
+}
+.navbar a {
+  color: var(--white-color);
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 500;
+}
+.navbar a:hover{
+  color: var(--blue-color);
+}
+.navbar-nav{
+  background-color: var(--black-color);
+  padding: 2rem;
+}
+/* dropdown menu */
+.dropdown-toggle.active {
+  background-color: #007bff; /* Warna latar belakang biru untuk menu utama */
+  color: white; /* Warna teks untuk menu utama */
+  padding: 10px;
+  border-radius: 10px;
+}
+.navbar-nav .dropdown {
+  position: relative;
+}
+
+.navbar-nav .dropdown-menu {
+  position: absolute;
+  top: 100%; /* Menampilkan dropdown tepat di bawah menu utama */
+  left: 0;
+  transform: none; /* Menghapus transformasi default Bootstrap */
+  margin-top: 0; /* Menghilangkan jarak vertikal */
 }
