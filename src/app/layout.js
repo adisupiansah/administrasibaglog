@@ -25,10 +25,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
-        {/* Navigasibar */}
         <Navigasibar/>
       </body>
+        {children}
     </html>
   );
 }

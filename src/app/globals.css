@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 /* fonts roboto google */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 :root {
   --background: #181818;
-  --blue-color: #2666CF;
-  --red-color: #C62E2E;
-  --green-color: #72BF78;
-  --yellow-color: #FABC3F;
-  --white-color: #FFFFFF;
-  --black-color: #1E1E1E;
+  --blue-color: #2666cf;
+  --red-color: #c62e2e;
+  --green-color: #72bf78;
+  --yellow-color: #fabc3f;
+  --white-color: #ffffff;
+  --black-color: #1e1e1e;
 }
 
 * {
@@ -24,11 +24,11 @@
 body {
   color: var(--white-color);
   background: var(--background);
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 /* navbar */
-.navbar{
+.navbar {
   background-color: var(--black-color);
   padding: 1rem;
   border-bottom: 1px solid var(--white-color);
@@ -39,10 +39,10 @@ body {
   font-size: 17px;
   font-weight: 500;
 }
-.navbar a:hover{
+.navbar a:hover {
   color: var(--blue-color);
 }
-.navbar-nav{
+.navbar-nav {
   background-color: var(--black-color);
   padding: 2rem;
 }
@@ -63,4 +63,70 @@ body {
   left: 0;
   transform: none; /* Menghapus transformasi default Bootstrap */
   margin-top: 0; /* Menghilangkan jarak vertikal */
+}
+
+/* component dashboard CARD*/
+.card {
+  min-height: 200px;
+}
+.card-view {
+  margin-top: 2rem;
+}
+.card-view .card {
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: var(--black-color);
+}
+.card-title,
+.card-text {
+  color: var(--white-color);
+}
+.card-text {
+  font-size: 14px;
+}
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+.card .title-ndkeluar {
+  color: var(--red-color);
+  font-size: 40px;
+  font-weight: 600;
+}
+.card .title-disposisi {
+  color: var(--green-color);
+  font-size: 40px;
+  font-weight: 600;
+}
+.card-text-disposisi{
+  color: var(--white-color);
+  font-size: 14px;
+}
+.card-text-disposisi
+span {
+  color: var(--green-color);
+}
+.card .title-ndranmor{
+  color: var(--yellow-color);
+  font-size: 40px;
+  font-weight: 600;
+}
+.card-text-ndranmor{
+  color: var(--white-color);
+  font-size: 14px;
+}
+.card-text-ndranmor span {
+  color: var(--yellow-color);
+}
+.card .title-ndharwat{
+  color: var(--blue-color);
+  font-size: 40px;
+  font-weight: 600;
+}
+.card-text-ndharwat{
+  color: var(--white-color);
+  font-size: 14px;
+}
+.card-text-ndharwat span {
+  color: var(--blue-color);
 }
