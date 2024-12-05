@@ -8,11 +8,35 @@ const CardNotaDinas = () => {
             <div className="col-md-4">
                 <div className="card notadinas">
                     <div className="card-body">
-                        <h5 className="card-title">
-                            BANYAK SURAT
+                        <h5 className="card-title p-2">
+                            SELURUH SURAT
                         </h5>
                         <div className="d-flex justify-content-center align-items-center">
-                          <h1 className='card-title'>110</h1>
+                          <h1 className='card-text py-3'>110</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="col-md-4">
+                <div className="card notadinas">
+                    <div className="card-body">
+                        <h5 className="card-title-bmp p-2">
+                            BANYAK SURAT BMP
+                        </h5>
+                        <div className="d-flex justify-content-center align-items-center">
+                          <h1 className='card-text-bmp py-3'>110</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="col-md-4">
+                <div className="card notadinas">
+                    <div className="card-body">
+                        <h5 className="card-title-harwat p-2">
+                            BANYAK SURAT HARWAT
+                        </h5>
+                        <div className="d-flex justify-content-center align-items-center">
+                          <h1 className='card-text-harwat py-3'>110</h1>
                         </div>
                     </div>
                 </div>

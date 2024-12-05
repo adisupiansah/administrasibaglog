@@ -146,10 +146,50 @@ span {
   padding: 1rem;
 }
 
-/* COMPONENT NOTA DINAS */
+/* COMPONENT NOTA DINAS - DASHAOARD */
 .card-notadinas{
   margin-top: 2rem;
 }
+.card-notadinas .card {
+  border-radius: 10px;
+}
 .card-notadinas .notadinas {
+  background: var(--black-color);
+}
+
+.notadinas .card-title {
+  color: var(--white-color);
+  font-size: 19px;
+}
+.notadinas .card-text {
+  color: var(--green-color);
+  font-size: 33px;
+  font-weight: 600;
+}
+.notadinas .card-title-bmp{
+  color: var(--white-color);
+  font-size: 19px;
+}
+.notadinas .card-text-bmp {
+  color: var(--blue-color);
+  font-size: 33px;
+  font-weight: 600;
+}
+.notadinas .card-title-harwat {
+  color: var(--white-color);
+  font-size: 19px;
+}
+.notadinas .card-text-harwat {
+  color: var(--red-color);
+  font-size: 33px;
+  font-weight: 600;
+}
+
+/* COMPONENET NOTA DINAS - CHART */
+.card-chartNotaDinas{
+  margin-top: 5rem;
+}
+.card-chartNotaDinas .card{
+  border-radius: 10px;
   background: var(--black-color);
 }
