@@ -2,6 +2,7 @@
 import Image from "next/image";
 import logo from "@/app/img/logoLogistik.png";
 import { useState } from "react";
+import Link from "next/link";
 
 const Navigasibar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State untuk membuka/menutup dropdown
@@ -44,7 +45,7 @@ const Navigasibar = () => {
             
               <a
                 className={`dropdown-toggle ${isDropdownOpen ? 'active' : ''} ${activeSubMenu ? 'active' : ''}`} // Menambahkan kelas active pada menu utama
-                href="#"
+                href="/notadinas"
                 onClick={toggleDropdown} // Menggunakan onClick untuk toggle dropdown
               >
                 {mainMenuText} {/* Menampilkan teks menu utama */}
@@ -52,27 +53,27 @@ const Navigasibar = () => {
               {isDropdownOpen && ( // Menampilkan dropdown jika isDropdownOpen true
                 <div className="dropdown-menu show mt-3">
           
-                  <a
+                  <Link
                     className={`dropdown-item ${activeSubMenu === 'input' ? 'active' : ''}`}
-                    href="#"
+                    href="/notadinas"
                     onClick={(e) => { e.preventDefault(); handleSubMenuClick('input'); }}
                   >
                     Input
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     className={`dropdown-item ${activeSubMenu === 'pengajuan' ? 'active' : ''}`}
                     href="#"
                     onClick={(e) => { e.preventDefault(); handleSubMenuClick('pengajuan'); }}
                   >
                     Pengajuan
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     className={`dropdown-item ${activeSubMenu === 'arsip' ? 'active' : ''}`}
                     href="#"
                     onClick={(e) => { e.preventDefault(); handleSubMenuClick('arsip'); }}
                   >
                     Arsip
-                  </a>
+                  </Link>
                 </div>
               )}
             </div>

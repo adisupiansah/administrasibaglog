@@ -130,3 +130,26 @@ span {
 .card-text-ndharwat span {
   color: var(--blue-color);
 }
+
+/* components dashboard chart */
+.mychart{
+  margin-top: 4rem;
+}
+.card-mychart{
+  background-color: var(--black-color);
+  border-radius: 10px;
+  padding: 1rem;
+}
+.card-mychartPolar {
+  background-color: var(--black-color);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+/* COMPONENT NOTA DINAS */
+.card-notadinas{
+  margin-top: 2rem;
+}
+.card-notadinas .notadinas {
+  background: var(--black-color);
+}
