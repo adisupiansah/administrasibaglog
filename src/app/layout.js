@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "bootstrap/dist/css/bootstrap.css";
+import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
 import "./globals.css";
 import Navigasibar from "@/components/Navigasi/Navigasibar";
 

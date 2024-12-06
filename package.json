@@ -11,6 +11,9 @@
   "dependencies": {
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.7",
+    "datatables.net-bs5": "^2.1.8",
+    "datatables.net-dt": "^2.1.8",
+    "jquery": "^3.7.1",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106"
