@@ -1,40 +1,24 @@
 "use client";
 import React, { useEffect } from "react";
-import InitTable from "@/libs/datatables-config";
 import Link from "next/link";
 import { createRoot } from "react-dom/client";
+import InitTable from "@/libs/datatables-config";
 
-const TablesNotadinas = () => {
-  const PengajuanSurat = () => {
+const ArsipNotaDinas = () => {
+  const BackToDashboard = () => {
     return (
-      <>
-        <Link href="#" type="button" className="btn pengajuan position-relative">
-          Pengajuan
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            20
-            <span class="visually-hidden">unread messages</span>
-          </span>
-        </Link>
-      </>
-    );
-  };
-  const ButtonSurat = () => {
-    return (
-      <Link href="#" className="btn buat-surat">
-        input surat
+      <Link href="#" className="btn back-dashboard-arsip">
+        Dashboard
       </Link>
     );
   };
+
   useEffect(() => {
-    let buatsurat = document.createElement("div");
-    let root = createRoot(buatsurat);
-    root.render(<ButtonSurat />);
+    let Dashboard = document.createElement("div");
+    let root = createRoot(Dashboard);
+    root.render(<BackToDashboard />);
 
-    let pengajuan = document.createElement("div");
-    let rootpengajuan = createRoot(pengajuan);
-    rootpengajuan.render(<PengajuanSurat />);
-
-    InitTable("#example", {
+    InitTable("#tableArsip", {
       language: {
         info: "Halaman _PAGE_ dari _PAGES_",
         infoEmpty: "tidak ada catatan yang tersedia",
@@ -53,22 +37,19 @@ const TablesNotadinas = () => {
             },
           },
         ],
-        topEnd: [pengajuan, buatsurat],
+        topEnd: Dashboard,
       },
     });
   }, []);
 
   return (
-    <div className="datatables" data-bs-theme="dark">
+    <div className="arsip-notadinas" data-bs-theme="dark">
       <div className="container">
         <div className="row">
           <div className="col">
             <div className="card">
-              <div className="card-body table-responsive">
-                <table
-                  className="table table-striped table-dark p-3 "
-                  id="example"
-                >
+              <div className="card-body">
+              <table className="table table-striped p-3 " id="tableArsip">
                   <thead>
                     <tr>
                       <th>Name</th>
@@ -107,4 +88,4 @@ const TablesNotadinas = () => {
   );
 };
 
-export default TablesNotadinas;
+export default ArsipNotaDinas;

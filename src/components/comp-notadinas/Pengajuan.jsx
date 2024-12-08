@@ -1,40 +1,24 @@
 "use client";
 import React, { useEffect } from "react";
 import InitTable from "@/libs/datatables-config";
-import Link from "next/link";
 import { createRoot } from "react-dom/client";
+import Link from "next/link";
 
-const TablesNotadinas = () => {
-  const PengajuanSurat = () => {
+const PengajuanNotaDinas = () => {
+
+  const Dashboard = () => {
     return (
-      <>
-        <Link href="#" type="button" className="btn pengajuan position-relative">
-          Pengajuan
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            20
-            <span class="visually-hidden">unread messages</span>
-          </span>
-        </Link>
-      </>
-    );
-  };
-  const ButtonSurat = () => {
-    return (
-      <Link href="#" className="btn buat-surat">
-        input surat
+      <Link href="#" className="btn back-dashboard">
+        Dashboard 
       </Link>
     );
   };
+
   useEffect(() => {
-    let buatsurat = document.createElement("div");
-    let root = createRoot(buatsurat);
-    root.render(<ButtonSurat />);
-
-    let pengajuan = document.createElement("div");
-    let rootpengajuan = createRoot(pengajuan);
-    rootpengajuan.render(<PengajuanSurat />);
-
-    InitTable("#example", {
+    let tombolBack = document.createElement('div')
+    let root = createRoot(tombolBack)
+    root.render(<Dashboard />);
+    InitTable("#tablepengajuan", {
       language: {
         info: "Halaman _PAGE_ dari _PAGES_",
         infoEmpty: "tidak ada catatan yang tersedia",
@@ -47,28 +31,22 @@ const TablesNotadinas = () => {
           {
             search: {
               placeholder: "Cari data",
-            },
-            pageLength: {
-              menu: [10, 50, 500],
-            },
+            }
           },
         ],
-        topEnd: [pengajuan, buatsurat],
+        topEnd: tombolBack,
       },
     });
   }, []);
 
   return (
-    <div className="datatables" data-bs-theme="dark">
+    <div className="pengajuan-notadinas" data-bs-theme="dark">
       <div className="container">
         <div className="row">
           <div className="col">
             <div className="card">
-              <div className="card-body table-responsive">
-                <table
-                  className="table table-striped table-dark p-3 "
-                  id="example"
-                >
+              <div className="card-body">
+                <table className="table table-striped p-3 " id="tablepengajuan">
                   <thead>
                     <tr>
                       <th>Name</th>
@@ -107,4 +85,4 @@ const TablesNotadinas = () => {
   );
 };
 
-export default TablesNotadinas;
+export default PengajuanNotaDinas;

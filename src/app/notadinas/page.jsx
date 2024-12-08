@@ -7,8 +7,8 @@ const page = () => {
   return (
     <div>
         <CardNotaDinas/>
+  
         <TablesNotadinas/>
-        {/* <ChartNotaDinas/> */}
     </div>
   )
 }

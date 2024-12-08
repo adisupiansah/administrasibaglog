@@ -13,15 +13,13 @@ const ChartNotaDinas = () => {
         const data = {
             labels: [
                 'SELURUH SURAT',
-                'SURAT BMP',
-                'SURAT HARWAT'
+                'SURAT HARWAT, BMP'
             ],
             datasets: [
                 {
                     label: 'Jumlah',
-                    data: [124, 52, 72],
+                    data: [126, 65],
                     backgroundColor : [
-                        'rgb(114, 191, 120)',
                         'rgb(38, 102, 207)',
                         'rgb(198, 46, 46)'
                     ],
@@ -56,7 +54,7 @@ const ChartNotaDinas = () => {
     <div className='card-chartNotaDinas'>
       <div className="container">
         <div className="row d-flex justify-content-center align-items-center">
-            <div className="col-md-6">
+            <div className="col">
                 <div className="card">
                     <div className="card-body">
                         <div className="d-flex justify-content-center align-items-center">

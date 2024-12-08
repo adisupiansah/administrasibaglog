@@ -62,7 +62,7 @@ const BarChart = () => {
   })
 
   const myChartPolar = new Chart(cpr, {
-    type: 'polarArea',
+    type: 'pie',
     data: dataPola,
     options: options,
   })
@@ -76,14 +76,14 @@ const BarChart = () => {
     <div className="mychart">
       <div className="container">
         <div className="row">
-          <div className="col-md-8">
-              <div className="card card-mychart">
-                <div className="card-body">
-                    <canvas ref={chartRef} className='chart'></canvas>
+          <div className="col-md-7 col-sm-12 card-mychart d-flex justify-content-center align-items-center">
+              <div className="w-100">
+                <div className="card-bod">
+                    <canvas ref={chartRef} className='charts'></canvas>
                 </div>
               </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-5 col-sm-12">
               <div className="card card-mychartPolar">
                 <div className="card-body">
                     <canvas ref={chartPolaRef} className='chartPola'></canvas>

@@ -13,6 +13,7 @@
   --yellow-color: #fabc3f;
   --white-color: #ffffff;
   --black-color: #1e1e1e;
+  --grey-color: #D9D9D9;
 }
 
 * {
@@ -134,6 +135,7 @@ span {
 /* components dashboard chart */
 .mychart{
   margin-top: 4rem;
+  margin-bottom: 4rem;
 }
 .card-mychart{
   background-color: var(--black-color);
@@ -162,7 +164,7 @@ span {
   font-size: 19px;
 }
 .notadinas .card-text {
-  color: var(--green-color);
+  color: var(--blue-color);
   font-size: 33px;
   font-weight: 600;
 }
@@ -171,7 +173,7 @@ span {
   font-size: 19px;
 }
 .notadinas .card-text-bmp {
-  color: var(--blue-color);
+  color: var(--red-color);
   font-size: 33px;
   font-weight: 600;
 }
@@ -186,10 +188,141 @@ span {
 }
 
 /* COMPONENET NOTA DINAS - CHART */
-.card-chartNotaDinas{
+/* .card-chartNotaDinas{
   margin-top: 5rem;
-}
+} */
 .card-chartNotaDinas .card{
   border-radius: 10px;
   background: var(--black-color);
+}
+
+/* COMPONENT NOTA DINAS - TABLE */
+.datatables{
+  margin-top: 5rem;
+  margin-bottom: 3rem;
+}
+.datatables .card{
+  border-radius: 10px;
+  background: var(--black-color);
+}
+.buat-surat{
+  background-color: var(--green-color);
+  font-weight: 500;
+  font-size: 15px;
+  border-radius:5px ;
+  padding: 5px 10px;
+  color: var(--white-color);
+}
+.pengajuan{
+  background-color: var(--blue-color);
+  font-weight: 500;
+  font-size: 15px;
+  border-radius:5px ;
+  padding: 5px 10px;
+  color: var(--white-color);
+}
+.buat-surat:hover{
+  background-color: var(--black-color);
+  border: 1px solid var(--green-color);
+  color: var(--white-color);
+}
+.pengajuan:hover{
+  background-color: var(--black-color);
+  border: 1px solid var(--blue-color);
+  color: var(--white-color);
+}
+
+/* COMPONENTS NOTA DINAS - INPUT NOTA DINAS */
+.input-notadinas{
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+.input-notadinas .card{
+  border-radius: 10px;
+  background: var(--black-color);
+}
+.input-notadinas .card-title{
+  color: var(--white-color);
+  font-weight: 600;
+  font-size: 24px;
+}
+.input-notadinas input {
+  background-color: var(--grey-color);
+  margin-top: 25px;
+  padding: 12px;
+  border-radius: 20px;
+}
+.input-notadinas input:focus{
+  background-color: var(--grey-color);
+  border: 2px solid var(--red-color);
+  box-shadow: none;
+}
+.button-inputnotadinas .btn{
+  background-color: var(--green-color);
+  font-weight: 500;
+  color: var(--black-color);
+  font-size: 20px;
+  margin-top: 55px;
+}
+.button-inputnotadinas .btn:hover{
+  background-color: var(--black-color);
+  color: var(--white-color);
+  border: 1px solid var(--green-color);
+}
+.button-inputnotadinas .reset{
+  background-color: var(--red-color);
+  color: var(--white-color);
+  font-weight: 500;
+  font-size: 20px;
+}
+.button-inputnotadinas .reset:hover{
+  background-color: var(--black-color);
+  color: var(--white-color);
+  border: 1px solid var(--red-color);
+}
+
+/* COMPONENT NOTA DINAS - PENGAJUAN */
+.pengajuan-notadinas {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+.pengajuan-notadinas .card{
+  border-radius: 10px;
+  background: var(--black-color);
+  border: none;
+}
+.back-dashboard{
+  background: var(--blue-color);
+  font-weight: 500;
+  font-size: 15px;
+  border-radius:5px ;
+  padding: 5px 10px;
+  color: var(--white-color);
+}
+.back-dashboard:hover{
+  background-color: var(--black-color);
+  border: 1px solid var(--blue-color);
+  color: var(--white-color);
+}
+
+/* COMPONENTS NOTA DINAS - ARSIP */
+.arsip-notadinas{
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+.arsip-notadinas .card {
+  border-radius: 10px;
+  background: var(--black-color);
+  border: none;
+}
+.back-dashboard-arsip{
+  background: var(--blue-color);
+  color: var(--white-color);
+  font-weight: 500;
+  font-size: 15px;
+}
+.back-dashboard-arsip:hover{
+  background-color: var(--black-color);
+  border: 1px solid var(--blue-color);
+  color: var(--white-color);
 }

@@ -40,22 +40,22 @@ const Navigasibar = () => {
       <nav className="navbar-nav shadow-sm">
         <div className="container">
           <div className="d-flex justify-content-center align-items-center gap-3">
-            <a href="">Dashboard</a>
+            <a href="/">Dashboard</a>
             <div className="dropdown">
             
-              <a
-                className={`dropdown-toggle ${isDropdownOpen ? 'active' : ''} ${activeSubMenu ? 'active' : ''}`} // Menambahkan kelas active pada menu utama
-                href="/notadinas"
+              <div
+                className= {`pointer dropdown-toggle ${isDropdownOpen ? 'active' : ''} ${activeSubMenu ? 'active' : ''}`} // Menambahkan kelas active pada menu utama
+               
                 onClick={toggleDropdown} // Menggunakan onClick untuk toggle dropdown
               >
                 {mainMenuText} {/* Menampilkan teks menu utama */}
-              </a>
+              </div>
               {isDropdownOpen && ( // Menampilkan dropdown jika isDropdownOpen true
                 <div className="dropdown-menu show mt-3">
           
                   <Link
                     className={`dropdown-item ${activeSubMenu === 'input' ? 'active' : ''}`}
-                    href="/notadinas"
+                    href={"/notadinas"}
                     onClick={(e) => { e.preventDefault(); handleSubMenuClick('input'); }}
                   >
                     Input
@@ -77,7 +77,7 @@ const Navigasibar = () => {
                 </div>
               )}
             </div>
-            <a href="">Disposisi</a>
+            <a href="/">Disposisi</a>
           </div>
         </div>
       </nav>
