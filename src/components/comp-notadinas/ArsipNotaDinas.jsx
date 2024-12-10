@@ -33,7 +33,10 @@ const ArsipNotaDinas = () => {
               placeholder: "Cari data",
             },
             pageLength: {
-              menu: [10, 50, 500],
+              menu: [
+                [10, 25, 100, -1],
+                [10, 25, 100, "All"],
+              ],
             },
           },
         ],

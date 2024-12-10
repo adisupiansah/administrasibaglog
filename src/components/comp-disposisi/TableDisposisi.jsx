@@ -4,39 +4,19 @@ import InitTable from "@/libs/datatables-config";
 import Link from "next/link";
 import { createRoot } from "react-dom/client";
 
-const TablesNotadinas = () => {
-  const PengajuanSurat = () => {
-    return (
-      <>
-        <Link
-          href="#"
-          type="button"
-          className="btn pengajuan position-relative"
-        >
-          Pengajuan
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            20
-            <span class="visually-hidden">unread messages</span>
-          </span>
-        </Link>
-      </>
-    );
-  };
+const TableDisposisi = () => {
+ 
   const ButtonSurat = () => {
     return (
-      <Link href="#" className="btn buat-surat">
-        input surat
+      <Link href="#" className="btn buat-disposisi">
+        input disposisi
       </Link>
     );
   };
   useEffect(() => {
-    let buatsurat = document.createElement("div");
-    let root = createRoot(buatsurat);
+    let buatdisposisi = document.createElement("div");
+    let root = createRoot(buatdisposisi);
     root.render(<ButtonSurat />);
-
-    let pengajuan = document.createElement("div");
-    let rootpengajuan = createRoot(pengajuan);
-    rootpengajuan.render(<PengajuanSurat />);
 
     InitTable("#example", {
       language: {
@@ -60,58 +40,48 @@ const TablesNotadinas = () => {
             },
           },
         ],
-        topEnd: [pengajuan, buatsurat],
+        topEnd: buatdisposisi,
       },
-      scrollX: true,
     });
   }, []);
 
   return (
-    <div className="datatables" data-bs-theme="dark">
+    <div className="datatablesdisposisi" data-bs-theme="dark">
       <div className="container">
         <div className="row">
           <div className="col">
             <div className="card">
-              <div className="card-body">
+              <div className="card-body table-responsive">
                 <table
                   className="table table-striped table-dark p-3 "
                   id="example"
                 >
                   <thead>
                     <tr>
-                      <th>First name</th>
-                      <th>Last name</th>
+                      <th>Name</th>
                       <th>Position</th>
                       <th>Office</th>
                       <th>Age</th>
                       <th>Start date</th>
                       <th>Salary</th>
-                      <th>Extn.</th>
-                      <th>E-mail</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>Tiger</td>
-                      <td>Nixon</td>
+                      <td>Tiger Nixon</td>
                       <td>System Architect</td>
                       <td>Edinburgh</td>
                       <td>61</td>
                       <td>2011-04-25</td>
                       <td>$320,800</td>
-                      <td>5421</td>
-                      <td>t.nixon@datatables.net</td>
                     </tr>
                     <tr>
-                      <td>Garrett</td>
-                      <td>Winters</td>
+                      <td>Garrett Winters</td>
                       <td>Accountant</td>
                       <td>Tokyo</td>
                       <td>63</td>
                       <td>2011-07-25</td>
                       <td>$170,750</td>
-                      <td>8422</td>
-                      <td>g.winters@datatables.net</td>
                     </tr>
                   </tbody>
                 </table>
@@ -124,4 +94,4 @@ const TablesNotadinas = () => {
   );
 };
 
-export default TablesNotadinas;
+export default TableDisposisi;
