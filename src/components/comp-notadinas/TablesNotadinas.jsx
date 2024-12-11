@@ -1,15 +1,19 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import InitTable from "@/libs/datatables-config";
 import Link from "next/link";
 import { createRoot } from "react-dom/client";
 
 const TablesNotadinas = () => {
+
+  const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true) // state untuk loading
+
   const PengajuanSurat = () => {
     return (
       <>
         <Link
-          href="#"
+          href="/notadinas/pengajuan"
           type="button"
           className="btn pengajuan position-relative"
         >
@@ -29,7 +33,9 @@ const TablesNotadinas = () => {
       </Link>
     );
   };
-  useEffect(() => {
+
+  const DataTables = () => {
+    // insiliasai datatables
     let buatsurat = document.createElement("div");
     let root = createRoot(buatsurat);
     root.render(<ButtonSurat />);
@@ -64,6 +70,38 @@ const TablesNotadinas = () => {
       },
       scrollX: true,
     });
+
+  }
+
+  const ambilData = async () => {
+    try {
+      const response = await fetch('/api/v1/notadinas/getnota')
+      if (!response.ok) {
+        throw new Error("gagal fetch data")
+      }
+      const hasil = await response.json()
+      setData(hasil)
+
+    } catch (error) {
+      console.error("error saat mengambil data:", error);
+    } finally{
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    if (!loading && data.length > 0) {
+      // Inisialisasi DataTables setelah data tersedia
+      const table =  DataTables();
+      if (table) {
+        table.destroy()
+      }
+    }
+  }, [loading, data]);
+
+  // ambil data saat komponen dimuat
+  useEffect(() => {
+    ambilData()
   }, []);
 
   return (
@@ -73,48 +111,43 @@ const TablesNotadinas = () => {
           <div className="col">
             <div className="card">
               <div className="card-body">
-                <table
-                  className="table table-striped table-dark p-3 "
-                  id="example"
-                >
-                  <thead>
-                    <tr>
-                      <th>First name</th>
-                      <th>Last name</th>
-                      <th>Position</th>
-                      <th>Office</th>
-                      <th>Age</th>
-                      <th>Start date</th>
-                      <th>Salary</th>
-                      <th>Extn.</th>
-                      <th>E-mail</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Tiger</td>
-                      <td>Nixon</td>
-                      <td>System Architect</td>
-                      <td>Edinburgh</td>
-                      <td>61</td>
-                      <td>2011-04-25</td>
-                      <td>$320,800</td>
-                      <td>5421</td>
-                      <td>t.nixon@datatables.net</td>
-                    </tr>
-                    <tr>
-                      <td>Garrett</td>
-                      <td>Winters</td>
-                      <td>Accountant</td>
-                      <td>Tokyo</td>
-                      <td>63</td>
-                      <td>2011-07-25</td>
-                      <td>$170,750</td>
-                      <td>8422</td>
-                      <td>g.winters@datatables.net</td>
-                    </tr>
-                  </tbody>
-                </table>
+                {loading ? (
+                  <p className='loading'>loading..</p>
+                ) : (
+                  <table
+                    className="table table-striped table-dark p-3 "
+                    id="example"
+                  >
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Tanggal surat</th>
+                        <th>Nomor surat</th>
+                        <th>Kepada</th>
+                        <th>Hal</th>
+                        <th>Tanggal input</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data.map((item, index) => (
+                        <tr key={item.id}>
+                          <td>{index + 1}</td>
+                          <td>{item.tgl_surat}</td>
+                          <td>{item.no_surat}</td>
+                          <td>{item.kepada}</td>
+                          <td>{item.perihal}</td>
+                          <td>{item.tgl_input}</td>
+                          <td className='d-flex flex-column justify-content-between align-items-center g-2'>
+                            <Link href='#' className='btn btn-sm btn-danger col-sm-12'>Delete</Link> 
+                            <Link href='#' className='btn btn-sm btn-warning col-sm-12 mt-2'>Edit</Link>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+
               </div>
             </div>
           </div>
