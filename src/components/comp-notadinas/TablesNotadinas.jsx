@@ -3,11 +3,15 @@ import React, { useEffect, useState } from "react";
 import InitTable from "@/libs/datatables-config";
 import Link from "next/link";
 import { createRoot } from "react-dom/client";
+import EditNotaDinas from "./EditNotaDinas";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 const TablesNotadinas = () => {
 
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true) // state untuk loading
+  const [editData, setEditData] = useState(null)
+
 
   const PengajuanSurat = () => {
     return (
@@ -89,6 +93,11 @@ const TablesNotadinas = () => {
     }
   }
 
+  const handleEditData = (id) => {
+    const edit = data.find((item) => item.id === id);
+    setEditData(edit);
+  }
+
   useEffect(() => {
     if (!loading && data.length > 0) {
       // Inisialisasi DataTables setelah data tersedia
@@ -104,56 +113,97 @@ const TablesNotadinas = () => {
     ambilData()
   }, []);
 
+  // useEffect modal
+  useEffect(() => {
+    require("bootstrap/dist/js/bootstrap.bundle.min.js")
+  }, [])
+ 
   return (
-    <div className="datatables" data-bs-theme="dark">
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <div className="card">
-              <div className="card-body">
-                {loading ? (
-                  <p className='loading'>loading..</p>
-                ) : (
-                  <table
-                    className="table table-striped table-dark p-3 "
-                    id="example"
-                  >
-                    <thead>
-                      <tr>
-                        <th>No</th>
-                        <th>Tanggal surat</th>
-                        <th>Nomor surat</th>
-                        <th>Kepada</th>
-                        <th>Hal</th>
-                        <th>Tanggal input</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {data.map((item, index) => (
-                        <tr key={item.id}>
-                          <td>{index + 1}</td>
-                          <td>{item.tgl_surat}</td>
-                          <td>{item.no_surat}</td>
-                          <td>{item.kepada}</td>
-                          <td>{item.perihal}</td>
-                          <td>{item.tgl_input}</td>
-                          <td className='d-flex flex-column justify-content-between align-items-center g-2'>
-                            <Link href='#' className='btn btn-sm btn-danger col-sm-12'>Delete</Link> 
-                            <Link href='#' className='btn btn-sm btn-warning col-sm-12 mt-2'>Edit</Link>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                )}
+    <>
+      {/* modal */}
+      <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title text-dark" id="staticBackdropLabel">
+                Edit Nota Dinas
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <EditNotaDinas data={editData} />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div className="datatables" data-bs-theme="dark">
+        <div className="container">
+          <div className="row">
+            <div className="col">
+              <div className="card">
+                <div className="card-body">
+                  {loading ? (
+                    <p className='loading'>loading..</p>
+                  ) : (
+                    <table
+                      className="table table-striped table-dark p-3 "
+                      id="example"
+                    >
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Tanggal surat</th>
+                          <th>Nomor surat</th>
+                          <th>Kepada</th>
+                          <th>Hal</th>
+                          <th>Tanggal input</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {data.map((item, index) => (
+                          <tr key={item.id}>
+                            <td>{index + 1}</td>
+                            <td>{item.tgl_surat}</td>
+                            <td>{item.no_surat}</td>
+                            <td>{item.kepada}</td>
+                            <td>{item.perihal}</td>
+                            <td>{item.tgl_input}</td>
+                            <td className='d-flex flex-column justify-content-between align-items-center g-2'>
+                              <button className='btn btn-sm btn-danger col-sm-12'>Delete</button> 
+                              <button 
+                              className='btn btn-sm btn-warning col-sm-12 mt-2' data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                              onClick={() => handleEditData(item.id)}>Edit</button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  )}
+
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

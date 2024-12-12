@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 const InputNotaDinas = () => {
   const [formData, setFormData] = useState({
@@ -27,7 +28,11 @@ const InputNotaDinas = () => {
 
       const data = await response.json();
       if (response.ok) {
-        alert('Data berhasil disimpan')
+          Swal.fire({
+            title: 'Data berhasil tersimpan',
+            icon: 'success',
+          })
+
         setFormData({
           tgl_surat: "",
           no_surat: "",
