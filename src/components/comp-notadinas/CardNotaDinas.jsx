@@ -1,7 +1,27 @@
-import React from 'react'
+"use client"
+import React, {useEffect, useState} from 'react';
 import ChartNotaDinas from './ChartNotaDinas'
 
+
 const CardNotaDinas = () => {
+
+  const [hitungData, setHitungData] = useState(0)
+
+  const hitung = async () => {
+    try{
+      const response = await fetch('/api/v1/notadinas/getnota');
+      const data = await response.json();
+      setHitungData(data.length);
+
+    } catch (error) {
+      console.log("Terdapat error saat menghitung seluruh data:",error);
+    }
+  }
+
+  useEffect(() => {
+    hitung();
+  }, []);
+
   return (
     <div className='card-notadinas'>
       <div className="container">
@@ -14,7 +34,7 @@ const CardNotaDinas = () => {
                             SELURUH SURAT
                         </h5>
                         <div className="d-flex justify-content-center align-items-center">
-                          <h1 className='card-text py-3'>126</h1>
+                          <h1 className='card-text py-3'>{hitungData}</h1>
                         </div>
                     </div>
                 </div>
