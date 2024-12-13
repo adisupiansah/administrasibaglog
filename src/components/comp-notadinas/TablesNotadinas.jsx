@@ -5,13 +5,13 @@ import Link from "next/link";
 import { createRoot } from "react-dom/client";
 import EditNotaDinas from "./EditNotaDinas";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import Swal from "sweetalert2";
 
 const TablesNotadinas = () => {
 
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true) // state untuk loading
   const [editData, setEditData] = useState(null)
-
 
   const PengajuanSurat = () => {
     return (
@@ -22,9 +22,9 @@ const TablesNotadinas = () => {
           className="btn pengajuan position-relative"
         >
           Pengajuan
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             20
-            <span class="visually-hidden">unread messages</span>
+            <span className="visually-hidden">unread messages</span>
           </span>
         </Link>
       </>
@@ -98,6 +98,38 @@ const TablesNotadinas = () => {
     setEditData(edit);
   }
 
+  const handleDeleteData = async (id) => {
+    Swal.fire({
+      title: 'Anda yakin?',
+      text: "Data yang dihapus tidak bisa dikembalikan!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#72bf78',
+      cancelButtonColor: '#c62e2e',
+      confirmButtonText: 'Ya, hapus data!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch(`/api/v1/notadinas/delete?id=${id}`, {
+            method: 'DELETE'
+          });
+
+          await response.json();
+          if (!response.ok) {
+            throw new Error("gagal hapus data")
+          }
+
+          Swal.fire('Terhapus', 'data berhasil dihapus', 'success')
+          ambilData() 
+
+        } catch (error) {
+          console.error("error saat menghapus data:", error);
+          Swal.fire('Gagal', 'data gagal dihapus', 'error')
+        }
+      } 
+    })
+  } 
+
   useEffect(() => {
     if (!loading && data.length > 0) {
       // Inisialisasi DataTables setelah data tersedia
@@ -121,11 +153,11 @@ const TablesNotadinas = () => {
   return (
     <>
       {/* modal */}
-      <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title text-dark" id="staticBackdropLabel">
+              <h5 className="modal-title" id="staticBackdropLabel">
                 Edit Nota Dinas
               </h5>
               <button
@@ -141,7 +173,7 @@ const TablesNotadinas = () => {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn"
                 data-bs-dismiss="modal"
               >
                 Close
@@ -186,10 +218,11 @@ const TablesNotadinas = () => {
                             <td>{item.perihal}</td>
                             <td>{item.tgl_input}</td>
                             <td className='d-flex flex-column justify-content-between align-items-center g-2'>
-                              <button className='btn btn-sm btn-danger col-sm-12'>Delete</button> 
                               <button 
-                              className='btn btn-sm btn-warning col-sm-12 mt-2' data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                              className='btn btn-sm action-edit col-sm-12' data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                               onClick={() => handleEditData(item.id)}>Edit</button>
+
+                              <button className='btn btn-sm action-delete col-sm-12 mt-2' onClick={() => handleDeleteData(item.id)}>Delete</button> 
                             </td>
                           </tr>
                         ))}

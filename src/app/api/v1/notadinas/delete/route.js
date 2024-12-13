@@ -13,9 +13,17 @@ export async function DELETE(request) {
             )
         }
 
+        
+        const parseId = parseInt(id, 10);
+        if (isNaN(parseId)) {
+            return new Response (
+                JSON.stringify({ error: "ID harus berupa angka" }),
+                { status: 400 }
+            )
+        }
         // Hapus data dari database menggunakan Prisma
          await prisma.notadinas.delete({
-            where: {id}
+            where: {id: parseId},
         })
 
         return new Response (

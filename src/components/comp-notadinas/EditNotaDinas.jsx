@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 
 const EditNotaDinas = ({ data }) => {
   const [formData, setFormData] = useState({
@@ -26,7 +27,8 @@ const EditNotaDinas = ({ data }) => {
       [name]: value,
     }));
   };
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       const response = await fetch("api/v1/notadinas/edit", {
         method: "PUT",
@@ -40,18 +42,25 @@ const EditNotaDinas = ({ data }) => {
       if (!response.ok) {
         throw new Error(result.error);
       }
-
-      alert("Data berhasil diupdate");
-      window.location.reload();
+      
+      Swal.fire({
+        title: "Update Berhasil",
+        text: "Data berhasil diedit",
+        icon: "success",
+      }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
+      });
     } catch (error) {
       console.error("Eror saat edit data:", error);
       alert("TERJADI KESALAHAN SAAT EDIT DATA");
     }
   };
   return (
-    <div>
-      <form>
-        <div className="mb-3">
+    <div className='form-editnotadinas'>
+      <form onSubmit={handleSubmit}>
+        <div className="mt-3">
           <label className="form-label">Tanggal Surat</label>
           <input
             type="date"
@@ -61,7 +70,7 @@ const EditNotaDinas = ({ data }) => {
             onChange={handleInputChange}
           />
         </div>
-        <div className="mb-3">
+        <div className="mt-3">
           <label className="form-label">Nomor Surat</label>
           <input
             type="text"
@@ -71,7 +80,7 @@ const EditNotaDinas = ({ data }) => {
             onChange={handleInputChange}
           />
         </div>
-        <div className="mb-3">
+        <div className="mt-3">
           <label className="form-label">Kepada</label>
           <input
             type="text"
@@ -81,7 +90,7 @@ const EditNotaDinas = ({ data }) => {
             onChange={handleInputChange}
           />
         </div>
-        <div className="mb-3">
+        <div className="mt-3">
           <label className="form-label">Perihal</label>
           <input
             type="text"
@@ -91,6 +100,10 @@ const EditNotaDinas = ({ data }) => {
             onChange={handleInputChange}
           />
         </div>
+      <div className='d-flex justify-content-center align-items-center mt-3'>
+        <button className='btn btn-editnotadinas col-md-6'>simpan</button>
+      </div>
+        
       </form>
     </div>
   );
