@@ -47,6 +47,10 @@ const EditNotaDinas = ({ data }) => {
         title: "Update Berhasil",
         text: "Data berhasil diedit",
         icon: "success",
+        confirmButtonText: "Yes",
+        confirmButtonColor: "#72bf78",
+        color: '#D9D9D9',
+        background: '#212529',
       }).then((result) => {
           if (result.isConfirmed) {
             window.location.reload();

@@ -233,6 +233,10 @@ span {
   font-size: 33px;
   font-weight: 600;
 }
+.card-text-bmp .jumlah-bmp{
+  color: var(--yellow-color);
+}
+
 /* COMPONENT NOTA DINAS - BUTTON ACTION TABLE */
 .datatables .action-delete{
   background-color: var(--red-color);
@@ -283,7 +287,7 @@ span {
   font-size: 15px;
   border-radius:5px ;
   padding: 5px 10px;
-  color: var(--white-color);
+  color: var(--black-color);
 }
 .pengajuan{
   background-color: var(--blue-color);
@@ -329,6 +333,18 @@ span {
   border: 2px solid var(--red-color);
   box-shadow: none;
 }
+.input-notadinas select {
+  background-color: var(--grey-color);
+  margin-top: 25px;
+  padding: 12px;
+  border-radius: 20px;
+}
+.input-notadinas select:focus{
+  background-color: var(--grey-color);
+  border: 2px solid var(--red-color);
+  box-shadow: none;
+}
+
 .button-inputnotadinas .btn{
   background-color: var(--green-color);
   font-weight: 500;

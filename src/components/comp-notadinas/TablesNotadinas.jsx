@@ -30,9 +30,10 @@ const TablesNotadinas = () => {
       </>
     );
   };
+  
   const ButtonSurat = () => {
     return (
-      <Link href="#" className="btn buat-surat">
+      <Link href="/notadinas/input" className="btn buat-surat">
         input surat
       </Link>
     );
@@ -106,7 +107,9 @@ const TablesNotadinas = () => {
       showCancelButton: true,
       confirmButtonColor: '#72bf78',
       cancelButtonColor: '#c62e2e',
-      confirmButtonText: 'Ya, hapus data!'
+      confirmButtonText: 'Ya, hapus data!',
+      color: '#D9D9D9',
+      background: '#212529',
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -118,9 +121,20 @@ const TablesNotadinas = () => {
           if (!response.ok) {
             throw new Error("gagal hapus data")
           }
-
-          Swal.fire('Terhapus', 'data berhasil dihapus', 'success')
-          ambilData() 
+          
+          Swal.fire({
+            title: 'Berhasil',
+            text: 'Data berhasil dihapus',
+            icon: 'success',
+            confirmButtonColor: '#72bf78',
+            color: '#D9D9D9',
+            background: '#212529',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.reload();
+            }
+            ambilData() 
+          })
 
         } catch (error) {
           console.error("error saat menghapus data:", error);
@@ -217,7 +231,7 @@ const TablesNotadinas = () => {
                             <td>{item.kepada}</td>
                             <td>{item.perihal}</td>
                             <td>{item.tgl_input}</td>
-                            <td className='d-flex flex-column justify-content-between align-items-center g-2'>
+                            <td className=''>
                               <button 
                               className='btn btn-sm action-edit col-sm-12' data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                               onClick={() => handleEditData(item.id)}>Edit</button>

@@ -31,19 +31,23 @@ const BarChart = () => {
     }
 
     const cpr = chartPolaRef.current.getContext('2d')
-    const dataPola = {
-      labels: ['Nota Dinas Keluar (BMP, Harwat)', 'Disposisi Masuk (BMP, Harwat)'],
+    const dataPola ={
+      labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
       datasets: [
         {
-          label: 'Data',
-          data: [25, 24],
-          backgroundColor: [
-            'rgb(38, 102, 207)',
-            'rgb(250, 188, 63)'
-          ]
+        label: 'Nota Dinas Keluar (BMP, Harwat)',
+        data: [7, 19, 20, 5, 20, 3, 11, 9, 1, 20, 10, 15],
+        backgroundColor: 'rgb(250, 188, 63)',
+        borderColor: 1,
+        }, 
+        {
+          label: 'Disposisi Masuk (BMP, Harwat)',
+          data: [12, 19, 3, 5, 2, 3, 10, 15, 20, 25, 30, 35],
+          backgroundColor: 'rgb(38, 102, 207)',
+          borderColor: 1,
+        },
         
-        }
-      ]
+  ]
     }
 
   const options = {
@@ -62,7 +66,7 @@ const BarChart = () => {
   })
 
   const myChartPolar = new Chart(cpr, {
-    type: 'pie',
+    type: 'bar',
     data: dataPola,
     options: options,
   })
@@ -76,16 +80,16 @@ const BarChart = () => {
     <div className="mychart">
       <div className="container">
         <div className="row">
-          <div className="col-md-7 col-sm-12 card-mychart d-flex justify-content-center align-items-center">
+          <div className="col-md-6 col-sm-12 card-mychart d-flex justify-content-center align-items-center">
               <div className="w-100">
                 <div className="card-bod">
                     <canvas ref={chartRef} className='charts'></canvas>
                 </div>
               </div>
           </div>
-          <div className="col-md-5 col-sm-12">
+          <div className="col-md-6 col-sm-12">
               <div className="card card-mychartPolar">
-                <div className="card-body">
+                <div className="card-bod">
                     <canvas ref={chartPolaRef} className='chartPola'></canvas>
                 </div>
               </div>

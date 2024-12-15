@@ -3,69 +3,60 @@ import Image from "next/image";
 import logo from "@/app/img/logoLogistik.png";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";  // Import usePathname untuk mendeteksi URL
+import { usePathname } from "next/navigation";
 
 const Navigasibar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [activeSubMenu, setActiveSubMenu] = useState(null);
   const [isDropdownOpenDisposisi, setIsDropdownOpenDisposisi] = useState(false);
-  const [activeSubMenuDisposisi, setActiveSubMenuDisposisi] = useState(false);
   const [activeMenu, setActiveMenu] = useState("Dashboard");
+  const [activeSubMenu, setActiveSubMenu] = useState(null);
 
-  const pathname = usePathname(); // Mengambil path URL saat ini
+  const pathname = usePathname();
 
   useEffect(() => {
-    // Set active menu berdasarkan URL
     if (pathname === "/") {
       setActiveMenu("Dashboard");
-    } else if (pathname.includes("notadinas")) {
-      setActiveMenu("Nota Dinas");
-    } else if (pathname.includes("disposisi")) {
-      setActiveMenu("Disposisi");
-    }
-  }, [pathname]); // Setiap kali URL berubah, aktifkan menu yang sesuai
-
-  const toggleDropdown = (e) => {
-    e.preventDefault();
-    setIsDropdownOpen(!isDropdownOpen);
-    if (!isDropdownOpen) {
-      setIsDropdownOpenDisposisi(false);
-      setActiveSubMenuDisposisi(null);
-    }
-  };
-
-  const toggleDropdownDisposisi = (e) => {
-    e.preventDefault();
-    setIsDropdownOpenDisposisi(!isDropdownOpenDisposisi);
-    if (!isDropdownOpenDisposisi) {
-      setIsDropdownOpen(false);
       setActiveSubMenu(null);
-    }
-  };
+    } else if (pathname.startsWith("/notadinas")) {
+      setActiveMenu("Nota Dinas");
 
-  const handleMenuSubClickDisposisi = (submenuItem) => {
-    setActiveSubMenuDisposisi(submenuItem);
+      if (pathname === "/notadinas") {
+        setActiveSubMenu("Nota keluar");
+      } else if (pathname === "/notadinas/input") {
+        setActiveSubMenu("Input");
+      } else if (pathname === "/notadinas/pengajuan") {
+        setActiveSubMenu("Pengajuan");
+      } else if (pathname === "/notadinas/arsip") {
+        setActiveSubMenu("Arsip");
+      }
+    } else if (pathname.startsWith("/disposisi")) {
+      setActiveMenu("Disposisi");
+
+      if (pathname === "/disposisi") {
+        setActiveSubMenu("Disposisi masuk");
+      } else if (pathname === "/disposisi/input") {
+        setActiveSubMenu("Input disposisi");
+      }
+    }
+  }, [pathname]);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
     setIsDropdownOpenDisposisi(false);
   };
 
-  const handleSubMenuClick = (submenuItem) => {
-    setActiveSubMenu(submenuItem);
+  const toggleDropdownDisposisi = () => {
+    setIsDropdownOpenDisposisi(!isDropdownOpenDisposisi);
     setIsDropdownOpen(false);
   };
 
-  const handleDasboardClick = () => {
-    setActiveMenu("Dashboard"); // Set active menu to Dashboard
-    setActiveSubMenu(null); // Reset active sub-menu of Nota Dinas
-    setActiveSubMenuDisposisi(null); // Reset active sub-menu of Disposisi
+  const handleSubMenuClick = () => {
+    setIsDropdownOpen(false);
+    setIsDropdownOpenDisposisi(false);
   };
 
-  const mainMenuDisposisi =
-    activeSubMenuDisposisi ? activeSubMenuDisposisi.charAt(0).toUpperCase() + activeSubMenuDisposisi.slice(1) : "Disposisi";
-
-  const mainMenuText =
-    activeSubMenu ? activeSubMenu.charAt(0).toUpperCase() + activeSubMenu.slice(1) : "Nota Dinas";
-
   const menuActiveClass = (menu) => (activeMenu === menu ? "active" : "");
+  const submenuActiveClass = (submenu) => (activeSubMenu === submenu ? "active" : "");
 
   return (
     <div>
@@ -83,43 +74,43 @@ const Navigasibar = () => {
       <nav className="navbar-nav shadow-sm">
         <div className="container">
           <div className="d-flex justify-content-center align-items-center gap-3">
-            <Link href="/" className={`pointer ${menuActiveClass("Dashboard")}`} onClick={handleDasboardClick}>
+            <Link href="/" className={`pointer ${menuActiveClass("Dashboard")}`}>
               Dashboard
             </Link>
             <div className="dropdown">
               <div
-                className={`pointer dropdown-toggle ${isDropdownOpen ? "active" : ""} ${activeSubMenu ? "active" : ""}`}
+                className={`pointer dropdown-toggle ${menuActiveClass("Nota Dinas")}`}
                 onClick={toggleDropdown}
               >
-                {mainMenuText}
+                {activeMenu === "Nota Dinas" ? activeSubMenu : "Nota Dinas"}
               </div>
               {isDropdownOpen && (
                 <div className="dropdown-menu show mt-3">
                   <Link
                     href="/notadinas"
-                    className={`dropdown-item ${activeSubMenu === "surat" ? "active" : ""}`}
-                    onClick={() => handleSubMenuClick("Nota keluar")}
+                    className={`dropdown-item ${submenuActiveClass("Nota keluar")}`}
+                    onClick={handleSubMenuClick}
                   >
                     Nota keluar
                   </Link>
                   <Link
                     href="/notadinas/input"
-                    className={`dropdown-item ${activeSubMenu === "input" ? "active" : ""}`}
-                    onClick={() => handleSubMenuClick("input")}
+                    className={`dropdown-item ${submenuActiveClass("Input")}`}
+                    onClick={handleSubMenuClick}
                   >
                     Input
                   </Link>
                   <Link
                     href="/notadinas/pengajuan"
-                    className={`dropdown-item ${activeSubMenu === "pengajuan" ? "active" : ""}`}
-                    onClick={() => handleSubMenuClick("pengajuan")}
+                    className={`dropdown-item ${submenuActiveClass("Pengajuan")}`}
+                    onClick={handleSubMenuClick}
                   >
                     Pengajuan
                   </Link>
                   <Link
                     href="/notadinas/arsip"
-                    className={`dropdown-item ${activeSubMenu === "arsip" ? "active" : ""}`}
-                    onClick={() => handleSubMenuClick("arsip")}
+                    className={`dropdown-item ${submenuActiveClass("Arsip")}`}
+                    onClick={handleSubMenuClick}
                   >
                     Arsip
                   </Link>
@@ -128,26 +119,24 @@ const Navigasibar = () => {
             </div>
             <div className="dropdown">
               <div
-                className={`pointer dropdown-toggle ${isDropdownOpenDisposisi ? "active" : ""} ${
-                  activeSubMenuDisposisi ? "active" : ""
-                }`}
+                className={`pointer dropdown-toggle ${menuActiveClass("Disposisi")}`}
                 onClick={toggleDropdownDisposisi}
               >
-                {mainMenuDisposisi}
+                {activeMenu === "Disposisi" ? activeSubMenu : "Disposisi"}
               </div>
               {isDropdownOpenDisposisi && (
                 <div className="dropdown-menu show mt-3">
                   <Link
                     href="/disposisi"
-                    className={`dropdown-item ${activeSubMenuDisposisi === "Dispo masuk" ? "active" : ""}`}
-                    onClick={() => handleMenuSubClickDisposisi("Disposisi masuk")}
+                    className={`dropdown-item ${submenuActiveClass("Disposisi masuk")}`}
+                    onClick={handleSubMenuClick}
                   >
                     Disposisi masuk
                   </Link>
                   <Link
                     href="/disposisi/input"
-                    className={`dropdown-item ${activeSubMenuDisposisi === "Input disposisi" ? "active" : ""}`}
-                    onClick={() => handleMenuSubClickDisposisi("Input disposisi")}
+                    className={`dropdown-item ${submenuActiveClass("Input disposisi")}`}
+                    onClick={handleSubMenuClick}
                   >
                     Input disposisi
                   </Link>

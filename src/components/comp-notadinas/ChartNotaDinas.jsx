@@ -10,6 +10,8 @@ const ChartNotaDinas = () => {
   const chart = useRef(null);
 
   const [hitung, setHitung] = useState(0);
+  const [hitungHarwat, setHitungHarwat] = useState(0);
+  const [hitungBMP, setHitungBMP] = useState(0);
 
   const InisialisasiChart = () => {
     if (chart.current) {
@@ -18,12 +20,12 @@ const ChartNotaDinas = () => {
 
     const ctx = chartRef.current.getContext("2d");
     const data = {
-      labels: ["SELURUH SURAT", "SURAT HARWAT, BMP"],
+      labels: ["SELURUH SURAT", "SURAT HARWAT", "SURAT BMP"],
       datasets: [
         {
           label: "Jumlah",
-          data: [hitung, 65],
-          backgroundColor: ["rgb(38, 102, 207)", "rgb(198, 46, 46)"],
+          data: [hitung, hitungHarwat, hitungBMP],
+          backgroundColor: ["rgb(38, 102, 207)", "rgb(198, 46, 46)", "rgb(250, 188, 63)"],
           hoverOffset: 4,
         },
       ],
@@ -50,7 +52,17 @@ const ChartNotaDinas = () => {
       const response = await fetch("/api/v1/notadinas/getnota");
       const data = await response.json();
       const result = data.length;
-      setHitung(result);
+      setHitung(result);// hitung data seluruh surat
+
+      // hitung data berdasarkan type_notadinas
+      const harwatCount = data.filter(
+        (item) => item.type_notadinas === "notadinas Harwat"
+      ).length;
+      const BmpCount = data.filter(
+        (item) => item.type_notadinas === "notadinas BMP"
+      ).length;
+      setHitungHarwat(harwatCount);
+      setHitungBMP(BmpCount);
     } catch (error) {
         console.error("Terjadi kesalahan saat menghitung seluruh data:", error);
         

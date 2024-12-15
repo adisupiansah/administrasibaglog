@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 
@@ -8,46 +8,79 @@ const InputNotaDinas = () => {
     no_surat: "",
     kepada: "",
     perihal: "",
+    type_notadinas: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    // Validasi form
+    if (!formData.tgl_surat || !formData.no_surat || !formData.kepada || !formData.perihal || !formData.type_notadinas) {
+      Swal.fire({
+        title: "Error",
+        text: "Harap lengkapi semua form!",
+        icon: "error",
+        confirmButtonColor: "#72bf78",
+        confirmButtonText: "OK",
+        color: "#D9D9D9",
+        background: "#212529",
+      });
+      return;
+    }
+  
     try {
-      const response = await fetch('/api/v1/notadinas/input', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const response = await fetch("/api/v1/notadinas/input", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
-      const data = await response.json();
+  
       if (response.ok) {
-          Swal.fire({
-            title: 'Data berhasil tersimpan',
-            icon: 'success',
-          })
+        const data = await response.json();
+        Swal.fire({
+          title: "Berhasil",
+          text: "Data berhasil tersimpan",
+          icon: "success",
+          confirmButtonColor: "#72bf78",
+          confirmButtonText: "OK",
+          color: "#D9D9D9",
+          background: "#212529",
+        }).then(() => {
+          window.location.href = "/notadinas";
+        })
+
 
         setFormData({
           tgl_surat: "",
           no_surat: "",
           kepada: "",
           perihal: "",
+          type_notadinas: "",
         });
       } else {
-        alert(data.message || 'gagal menyimpan data');
+        const error = await response.json();
+        Swal.fire({
+          title: "Error",
+          text: error.message || "Terjadi kesalahan saat menyimpan data",
+          icon: "error",
+        });
       }
-
     } catch (error) {
-      console.error("Error saat menyimpan data:", error);
-      alert('Terjadi kesalahan!');
+      console.error("Error:", error);
+      Swal.fire({
+        title: "Error",
+        text: "Terjadi kesalahan pada server",
+        icon: "error",
+      });
     }
-  }
+  };
+  
+
 
   return (
     <div className="input-notadinas">
@@ -92,9 +125,39 @@ const InputNotaDinas = () => {
                     onChange={handleChange}
                     placeholder="Hal.."
                   />
+
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    name="type_notadinas"
+                    value={formData.type_notadinas}
+                    onChange={handleChange}
+                  >
+                    <option value="">Pilih Type Nota Dinas</option>
+                    <option value="notadinas biasa">notadinas biasa</option>
+                    <option value="notadinas BMP">notadinas BMP</option>
+                    <option value="notadinas Harwat">notadinas Harwat</option>
+                  </select>
+
                   <div className="button-inputnotadinas d-flex justify-content-between flex-columns">
-                    <button className="btn col-md-5">submit</button>
-                    <button className="btn reset col-md-5" onClick={() => setFormData({tgl_surat:'', no_surat:'', kepada: '', perihal: ''})}>reset</button>
+                    <button className="btn col-md-5" type="submit">submit</button>
+                    <button
+                      className="btn reset col-md-5"
+                      onClick={(e) =>{
+                        e.preventDefault();
+                        setFormData({
+                          tgl_surat: "",
+                          no_surat: "",
+                          kepada: "",
+                          perihal: "",
+                          type_notadinas: "",
+                        })
+                      }
+                        
+                      }
+                    >
+                      reset
+                    </button>
                   </div>
                 </form>
               </div>

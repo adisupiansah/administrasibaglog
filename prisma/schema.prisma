@@ -42,5 +42,5 @@ model notadinas {
   kepada         String   @db.VarChar(100)
   perihal        String   @db.VarChar(200)
   tgl_input      DateTime @default(now()) @db.DateTime(0)
-  type_notadinas String?  @unique(map: "type_notadinas") @db.VarChar(100)
+  type_notadinas String   @db.VarChar(100)
 }
